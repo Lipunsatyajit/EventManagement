@@ -1,0 +1,26 @@
+.planning-tools { --plan-accent: #6a1b9a; min-width: 0; }
+.planning-tools__intro { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
+.planning-tools__intro a { color: var(--plan-accent); text-decoration: underline; }
+.planning-tools__columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+.planning-tools__panel { padding: clamp(1rem, 3vw, 2rem); background: #fffdf9; border: 1px solid #e2d9cb; border-radius: 1.5rem; box-shadow: 0 12px 35px #35204008; min-width: 0; }
+.planning-tools__eyebrow { font-size: .7rem; color: var(--plan-accent); letter-spacing: .16em; text-transform: uppercase; }
+.planning-tools h2 { margin: .5rem 0 1rem; font: 600 2rem Georgia, serif; }
+.planning-tools progress { width: 100%; height: .65rem; accent-color: var(--plan-accent); margin: .75rem 0; }
+.planning-tools fieldset { border: 0; min-width: 0; padding: 0; }
+.planning-tools__legend { font-size: .85rem; color: #6b6152; margin: .5rem 0; }
+.planning-tools__task, .planning-tools__expense { display: flex; align-items: center; flex-wrap: wrap; gap: .6rem; padding: .8rem 0; border-bottom: 1px solid #eee6dc; }
+.planning-tools__task label { display: flex; flex: 1; align-items: center; gap: .7rem; min-width: 130px; }
+.planning-tools input[type="checkbox"] { width: 20px; height: 20px; flex: none; accent-color: var(--plan-accent); }
+.planning-tools__task label:has(:checked) span { text-decoration: line-through; color: #6b6152; }
+.planning-tools button { cursor: pointer; padding: .65rem; min-height: 44px; color: var(--plan-accent); font-size: .85rem; }
+.planning-tools button:disabled { cursor: not-allowed; opacity: .6; }
+.planning-tools form { display: grid; gap: .8rem; margin-top: 1.2rem; }
+.planning-tools label { display: grid; gap: .4rem; font-size: .9rem; }
+.planning-tools input:not([type="checkbox"]) { width: 100%; min-width: 0; padding: .8rem; border: 1px solid #d6c9dd; border-radius: .7rem; background: white; }
+.planning-tools .planning-tools__primary { color: white; background: var(--plan-accent); border-radius: 2rem; font-weight: 600; }
+.planning-tools__total { background: linear-gradient(120deg, #321c3e, #6a1b9a); color: white; border-radius: 1rem; padding: 1.4rem; margin: 1rem 0; }
+.planning-tools__total strong { display: block; font: 600 clamp(1.6rem, 4vw, 2.5rem) Georgia, serif; margin: .5rem 0; overflow-wrap: anywhere; }
+.planning-tools__expense span { flex: 1; overflow-wrap: anywhere; }
+.planning-tools__hint { color: #6b6152; font-size: .85rem; margin-top: 1rem; }
+.planning-tools :focus-visible { outline: 2px solid var(--plan-accent); outline-offset: 3px; }
+@media (max-width: 800px) { .planning-tools__columns { grid-template-columns: minmax(0, 1fr); } }

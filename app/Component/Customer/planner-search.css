@@ -1,0 +1,11 @@
+.planner-search { margin-top: 1.5rem; min-width: 0; }
+.planner-search__filters { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+.planner-search label { display: grid; gap: .5rem; font-size: .9rem; font-weight: 600; min-width: 0; }
+.planner-search input, .planner-search select { width: 100%; min-width: 0; border: 1px solid #d9cde1; border-radius: .8rem; padding: .8rem; background: white; color: #241f1b; }
+.planner-search__summary { display: flex; align-items: center; flex-wrap: wrap; gap: 1rem; margin: 1.25rem 0; }
+.planner-search__summary button, .planner-search__summary a { color: #6a1b9a; font-weight: 600; cursor: pointer; padding: .6rem; }
+.planner-search__results { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
+.planner-search__empty { padding: 3rem 1rem; text-align: center; border: 1px dashed #d9cde1; border-radius: 1rem; }
+.planner-search :focus-visible { outline: 2px solid #6a1b9a; outline-offset: 3px; }
+@media (max-width: 900px) { .planner-search__filters { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 540px) { .planner-search__filters, .planner-search__results { grid-template-columns: minmax(0, 1fr); } }

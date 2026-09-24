@@ -1,26 +1,124 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #faf6ef;
+  --foreground: #241f1b;
+  --surface: #fffdf9;
+  --surface-strong: #f5ecdd;
+  --accent: #6a1b9a;
+  --accent-strong: #4e1774;
+  --accent-warm: #d4a437;
+  --muted: #6b6152;
+  --line: rgba(99, 79, 54, 0.16);
+  --shadow-soft: 0 24px 80px rgba(58, 34, 15, 0.08);
+  --font-display: "Georgia", "Times New Roman", serif;
+  --font-body: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-code: "Consolas", "Liberation Mono", monospace;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-code);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
+  min-width: 0;
+  margin: 0;
+  overflow-x: hidden;
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body), Arial, Helvetica, sans-serif;
+  background-image:
+    radial-gradient(circle at top left, rgba(106, 27, 154, 0.1), transparent 32%),
+    radial-gradient(circle at top right, rgba(212, 164, 55, 0.1), transparent 28%),
+    linear-gradient(180deg, #fffdf8 0%, #f8f1e6 52%, #f5ecdf 100%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  max-width: 100%;
+  font: inherit;
+}
+
+button,
+a,
+label,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+p,
+h1,
+h2,
+h3,
+li,
+dd {
+  overflow-wrap: anywhere;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: rgba(106, 27, 154, 0.16);
+}
+
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
+}
+
+.font-body {
+  font-family: var(--font-body), Arial, Helvetica, sans-serif;
+}
+
+.font-mono-custom {
+  font-family: var(--font-code), "IBM Plex Mono", monospace;
+}
+
+.shell-card {
+  background: rgba(255, 253, 249, 0.82);
+  border: 1px solid rgba(99, 79, 54, 0.12);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(12px);
+}
+
+.section-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (max-width: 479px) {
+  .shell-card {
+    border-radius: 1.35rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-grid {
+    gap: 2rem;
+  }
 }

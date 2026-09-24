@@ -1,0 +1,74 @@
+.pageLoader {
+  position: fixed;
+  top: 72px;
+  left: 0;
+  right: 0;
+  z-index: 99999;
+  height: 2px;
+  overflow: hidden;
+  pointer-events: none;
+  background: rgba(255, 255, 255, 0.08);
+  opacity: 0;
+  transform: translateY(-2px);
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease;
+}
+
+.pageLoaderVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.loaderBar {
+  width: 40%;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    #ff006e,
+    #8338ec,
+    #3a86ff,
+    #00c6ff,
+    #00d084,
+    #ffd60a,
+    #ff9f1c,
+    #ff006e
+  );
+  background-size: 300% 100%;
+  animation:
+    moveBar 1.2s ease-in-out infinite,
+    rainbow 2s linear infinite;
+  box-shadow: 0 0 18px rgba(131, 56, 236, 0.35);
+}
+
+@keyframes moveBar {
+  0% {
+    transform: translateX(-120%);
+  }
+
+  100% {
+    transform: translateX(350%);
+  }
+}
+
+@keyframes rainbow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 300% 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loaderBar { animation: none; width: 100%; }
+  .pageLoader { transition: none; }
+}
+
+@media (max-width: 767px) {
+  .pageLoader {
+    top: 64px;
+  }
+}

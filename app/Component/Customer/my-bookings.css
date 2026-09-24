@@ -1,0 +1,9 @@
+.my-bookings { display: grid; gap: 1.25rem; }
+.my-bookings__toolbar { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; }
+.my-bookings__toolbar a { color: #6a1b9a; text-decoration: underline; }
+.my-bookings select { padding: .7rem; background: white; border: 1px solid #d9cde1; border-radius: .6rem; }
+.my-bookings__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.my-bookings article { background: #fffdf9; border: 1px solid #e6dce9; border-radius: 1.3rem; padding: 1.5rem; display: grid; gap: .8rem; }
+.my-bookings h2 { font-family: Georgia, serif; font-size: 1.5rem; }
+.my-bookings button { justify-self: start; padding: .7rem 1rem; border: 1px solid #a52f36; color: #a52f36; border-radius: 2rem; cursor: pointer; }
+@media (max-width: 680px) { .my-bookings__grid { grid-template-columns: minmax(0, 1fr); } }

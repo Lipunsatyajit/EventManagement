@@ -1,0 +1,11 @@
+.consultation-form { margin-top: 1.5rem; display: grid; gap: 1rem; min-width: 0; }
+.consultation-form__fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.consultation-form label { display: grid; gap: .5rem; font-size: .9rem; font-weight: 600; min-width: 0; }
+.consultation-form input, .consultation-form select, .consultation-form textarea { width: 100%; min-width: 0; border: 1px solid #d9cde1; border-radius: .9rem; padding: .8rem; background: #fffdf8; }
+.consultation-form__wide { grid-column: 1 / -1; }
+.consultation-form textarea { min-height: 110px; resize: vertical; }
+.consultation-form button { background: #6a1b9a; color: white; min-height: 44px; border-radius: 2rem; padding: .8rem 1rem; cursor: pointer; font-weight: 600; }
+.consultation-form a { color: #6a1b9a; text-decoration: underline; }
+.consultation-form__note { color: #6b6152; font-size: .85rem; }
+.consultation-form :focus-visible { outline: 2px solid #6a1b9a; outline-offset: 3px; }
+@media (max-width: 540px) { .consultation-form__fields { grid-template-columns: minmax(0, 1fr); } }
