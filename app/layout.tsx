@@ -1,3 +1,4 @@
+import { sitePath } from "@/lib/site-path";
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import "./globals.css";
@@ -9,8 +10,8 @@ export const metadata: Metadata = {
   description:
     "Odisha event planner marketplace for discovering planners, reviewing portfolios, and requesting consultations.",
   icons: {
-    icon: "/icon.svg",
-    shortcut: "/icon.svg",
+    icon: sitePath("/icon.svg"),
+    shortcut: sitePath("/icon.svg"),
   },
 };
 

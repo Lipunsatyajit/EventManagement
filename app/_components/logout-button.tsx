@@ -1,4 +1,5 @@
 "use client";
+import { sitePath } from "@/lib/site-path";
 
 import { clearAuthSession } from "@/lib/auth-session";
 
@@ -15,7 +16,7 @@ export function LogoutButton({
 }: LogoutButtonProps) {
   function handleLogout() {
     clearAuthSession();
-    window.location.assign("/");
+    window.location.assign(sitePath("/"));
   }
 
   return (

@@ -1,4 +1,5 @@
 "use client";
+import { sitePath } from "@/lib/site-path";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -67,7 +68,7 @@ export function SiteHeader() {
       <div className={styles.inner}>
         <Link href="/" className={styles.brand} onClick={closeMenu}>
           <Image
-            src="/images/utkaleventslogo.svg"
+            src={sitePath("/images/utkaleventslogo.svg")}
             alt="Utkal Events"
             width={168}
             height={74}
@@ -136,7 +137,7 @@ export function SiteHeader() {
                   className={styles.customerLogoutItem}
                   onClick={() => {
                     clearAuthSession();
-                    window.location.assign("/");
+                    window.location.assign(sitePath("/"));
                   }}
                 >
                   <LogoutMenuIcon />
@@ -192,7 +193,7 @@ export function SiteHeader() {
         <div className={styles.drawerHeader}>
           <Link href="/" className={styles.drawerBrand} onClick={closeMenu}>
             <Image
-              src="/images/utkaleventslogo.svg"
+              src={sitePath("/images/utkaleventslogo.svg")}
               alt="Utkal Events"
               width={156}
               height={68}
@@ -253,7 +254,7 @@ export function SiteHeader() {
                   className={`${styles.actionLink} ${styles.drawerSecondaryAction} ${styles.drawerLogoutButton}`}
                   onClick={() => {
                     clearAuthSession();
-                    window.location.assign("/");
+                    window.location.assign(sitePath("/"));
                   }}
                 >
                   Logout

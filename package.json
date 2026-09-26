@@ -5,7 +5,12 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "postbuild": "node scripts/normalize-static-export.mjs",
+    "build:pages": "node scripts/build-pages.mjs",
+    "start": "node scripts/serve-static.mjs",
+    "preview:pages": "node scripts/preview-pages.mjs",
+    "test:e2e": "playwright test",
+    "test:pages": "playwright test --config playwright.pages.config.ts",
     "lint": "eslint"
   },
   "dependencies": {

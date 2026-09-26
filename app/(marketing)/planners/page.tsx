@@ -1,10 +1,17 @@
+"use client";
+import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { SiteHeader } from "../_components/site-header";
 import { SectionHeading } from "../_components/section-heading";
 import { PlannerSearch } from "@/app/Component/Customer/planner-search";
 
-export default async function PlannersPage({ searchParams }: { searchParams: Promise<{ district?: string; event?: string }> }) {
-  const params = await searchParams;
+export default function PlannersPage() {
+  return <Suspense fallback={<p>Loading planners...</p>}><PlannersContent /></Suspense>;
+}
+function PlannersContent() {
+  const search = useSearchParams();
+  const params = { district: search.get("district") ?? undefined, event: search.get("event") ?? undefined };
   return (
     <main className="min-h-screen">
       <SiteHeader />

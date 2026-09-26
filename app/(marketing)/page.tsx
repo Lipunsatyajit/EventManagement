@@ -1,3 +1,4 @@
+import { sitePath } from "@/lib/site-path";
 import Image from "next/image";
 import { ConsultationForm } from "@/app/Component/Customer/consultation-form";
 import Link from "next/link";
@@ -39,7 +40,7 @@ export default function HomePage() {
                 </p>
               </div>
 
-            <form action="/planners" className="relative z-10 mt-8 grid md:grid-cols-[1fr_1fr_auto] gap-2 rounded-2xl bg-white p-2 shadow-xl">
+            <form action={sitePath("/planners/")} className="relative z-10 mt-8 grid md:grid-cols-[1fr_1fr_auto] gap-2 rounded-2xl bg-white p-2 shadow-xl">
 
   <label className="grid gap-1 rounded-xl px-4 py-2">
     <span className="text-xs uppercase tracking-wide text-gray-500">
@@ -93,7 +94,7 @@ export default function HomePage() {
                 </p>
               </div>
               <div className="grid h-14 w-14 place-items-center rounded-2xl bg-[#6a1b9a]/10 text-xl text-[#6a1b9a]">
-                <Image src="/icon.svg" alt="" width={56} height={56} />
+                <Image src={sitePath("/icon.svg")} alt="" width={56} height={56} />
               </div>
             </div>
 

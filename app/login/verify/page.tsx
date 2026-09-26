@@ -1,3 +1,6 @@
+"use client";
+import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { AuthShell } from "../../(auth)/_components/auth-shell";
 import { OtpVerificationForm } from "../../(auth)/_components/otp-verification-form";
 import { authRoleOptions, type AuthRoleKey } from "@/lib/auth-directory";
@@ -6,12 +9,14 @@ function getRoleLabel(role: AuthRoleKey) {
   return authRoleOptions.find((option) => option.role === role)?.label ?? "Customer";
 }
 
-export default async function SharedOtpPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ email?: string; role?: string; plannerId?: string }>;
-}) {
-  const { email = "", role, plannerId } = await searchParams;
+export default function SharedOtpPage() {
+  return <Suspense fallback={<p>Loading verification...</p>}><VerificationContent /></Suspense>;
+}
+function VerificationContent() {
+  const search = useSearchParams();
+  const email = search.get("email") ?? "";
+  const role = search.get("role");
+  const plannerId = search.get("plannerId");
   const resolvedRole =
     authRoleOptions.find((option) => option.role === role)?.role ?? "customer";
   const roleLabel = getRoleLabel(resolvedRole);

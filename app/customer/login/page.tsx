@@ -1,5 +1,4 @@
-import { redirect } from "next/navigation";
-
-export default function CustomerLoginPage() {
-  redirect("/login?role=customer");
+import { ClientRedirect } from "@/app/_components/client-redirect";
+export default function LoginRedirectPage() {
+  return <ClientRedirect href="/login?role=customer" />;
 }

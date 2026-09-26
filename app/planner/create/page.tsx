@@ -1,12 +1,14 @@
+"use client";
+import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { PlannerAuthShell, PlannerCreateForm } from "../_components/planner-ui";
 import { getPlannerSignupOption } from "@/lib/auth-directory";
 
-export default async function PlannerCreatePage({
-  searchParams,
-}: {
-  searchParams: Promise<{ plannerId?: string }>;
-}) {
-  const { plannerId } = await searchParams;
+export default function PlannerCreatePage() {
+  return <Suspense fallback={<p>Loading registration...</p>}><PlannerCreateContent /></Suspense>;
+}
+function PlannerCreateContent() {
+  const plannerId = useSearchParams().get("plannerId") ?? undefined;
   const selectedPlanner = getPlannerSignupOption(plannerId);
 
   return (

@@ -1,5 +1,4 @@
-import { redirect } from "next/navigation";
-
-export default function PlannerLoginPage() {
-  redirect("/login?role=planner");
+import { ClientRedirect } from "@/app/_components/client-redirect";
+export default function LoginRedirectPage() {
+  return <ClientRedirect href="/login?role=planner" />;
 }

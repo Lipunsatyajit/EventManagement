@@ -1,4 +1,5 @@
 "use client";
+import { basePath } from "@/lib/site-path";
 
 import { useEffect, useRef, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
@@ -9,7 +10,7 @@ const HIDE_DELAY_MS = 220;
 export function PageLoader() {
   const pathname = usePathname();
   const search = useSearchParams().toString();
-  const routeKey = `${pathname}?${search}`;
+  const routeKey = `${basePath}${pathname}?${search}`;
   const [visible, setVisible] = useState(false);
   const showTimerRef = useRef<number | null>(null);
   const hideTimerRef = useRef<number | null>(null);

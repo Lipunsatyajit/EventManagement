@@ -1,12 +1,14 @@
 import { test, expect, type Page } from "@playwright/test";
 
+const siteUrl = (path: string) => `${process.env.TEST_BASE_PATH ?? ""}${path}`;
+
 async function login(page: Page, email: string, destination: string) {
-  await page.goto("/login?role=customer");
+  await page.goto(siteUrl("/login?role=customer"));
   await page.getByLabel("Email address").fill(email);
   await page.getByRole("button", { name: "Send OTP" }).click();
   await page.getByLabel("OTP code").fill("123456");
   await page.getByRole("button", { name: "Verify and continue" }).click();
-  await expect(page).toHaveURL(new RegExp(`${destination}$`));
+  await expect(page).toHaveURL(new RegExp(`${destination}/?$`));
 }
 
 for (const account of [
@@ -28,35 +30,35 @@ for (const account of [
 }
 
 test("unknown email and incorrect OTP do not create a session", async ({ page }) => {
-  await page.goto("/login/verify?email=unknown@example.com&role=customer");
+  await page.goto(siteUrl("/login/verify?email=unknown@example.com&role=customer"));
   await page.getByLabel("OTP code").fill("123456");
   await page.getByRole("button", { name: "Verify and continue" }).click();
   await expect(page.locator('form [role="alert"]')).toContainText("No matching account");
-  await page.goto("/login/verify?email=dream%40utkalevents.in&role=admin");
+  await page.goto(siteUrl("/login/verify?email=dream%40utkalevents.in&role=admin"));
   await page.getByLabel("OTP code").fill("000000");
   await page.getByRole("button", { name: "Verify and continue" }).click();
   await expect(page.locator('form [role="alert"]')).toBeVisible();
   expect(await page.evaluate(() => localStorage.getItem("utkal-auth-session"))).toBeNull();
   await page.getByLabel("OTP code").fill("123456");
   await page.getByRole("button", { name: "Verify and continue" }).click();
-  await expect(page).toHaveURL(/\/planner\/dashboard$/);
+  await expect(page).toHaveURL(/\/planner\/dashboard\/?$/);
 });
 
 test("planner registration persists for subsequent email login", async ({ page }) => {
-  await page.goto("/planner/create");
+  await page.goto(siteUrl("/planner/create"));
   await page.getByLabel("Full name", { exact: true }).fill("Test Planner");
   await page.getByLabel("Mobile number").fill("9876543210");
   await page.getByLabel("Email address").fill("newplanner@example.com");
   await page.getByRole("button", { name: "Create planner account" }).click();
   await page.getByLabel("OTP code").fill("123456");
   await page.getByRole("button", { name: "Verify and continue" }).click();
-  await expect(page).toHaveURL(/\/planner\/dashboard$/);
+  await expect(page).toHaveURL(/\/planner\/dashboard\/?$/);
   await page.evaluate(() => localStorage.removeItem("utkal-auth-session"));
   await login(page, "newplanner@example.com", "/planner/dashboard");
 });
 
 test("planner search filters and empty state", async ({ page }) => {
-  await page.goto("/planners?district=Puri&event=Wedding");
+  await page.goto(siteUrl("/planners?district=Puri&event=Wedding"));
   await expect(page.locator(".planner-search__results article")).toHaveCount(1);
   await expect(page.locator(".planner-search__results")).toContainText("Elegant Planners");
   await page.getByLabel("Planner name").fill("no-match");
@@ -67,7 +69,7 @@ test("planner search filters and empty state", async ({ page }) => {
 
 test("consultation request is saved, persists and can be cancelled", async ({ page }) => {
   await login(page, "customer@utkalevents.in", "/planners");
-  await page.goto("/#contact");
+  await page.goto(siteUrl("/#contact"));
   const form = page.locator(".consultation-form");
   await form.getByLabel("Full name").fill("Test Customer");
   await form.getByLabel("Mobile number").fill("9876543210");
@@ -77,7 +79,7 @@ test("consultation request is saved, persists and can be cancelled", async ({ pa
   await form.getByLabel("Expected budget").fill("200000");
   await form.getByRole("button", { name: "Save consultation request" }).click();
   await expect(form.getByRole("status")).toContainText("Request saved");
-  await page.goto("/customer/bookings");
+  await page.goto(siteUrl("/customer/bookings"));
   await expect(page.locator(".my-bookings article")).toContainText("Pending");
   await page.reload();
   await page.getByRole("button", { name: "Cancel request" }).click();
@@ -86,7 +88,7 @@ test("consultation request is saved, persists and can be cancelled", async ({ pa
 
 test("checklist and budget persist across reload", async ({ page }) => {
   await login(page, "customer@utkalevents.in", "/planners");
-  await page.goto("/customer/planning");
+  await page.goto(siteUrl("/customer/planning"));
   await page.getByLabel("New task").fill("Confirm guest transport");
   await page.getByRole("button", { name: "Add task", exact: true }).click();
   await page.getByRole("checkbox", { name: "Confirm guest transport", exact: true }).check();
@@ -104,7 +106,7 @@ for (const width of [375, 768, 1024, 1440]) {
     const errors: string[] = [];
     page.on("pageerror", (error) => errors.push(error.message));
     for (const route of ["/", "/planners", "/login", "/customer/account", "/customer/bookings", "/customer/planning", "/planner/dashboard", "/admin/dashboard"]) {
-      await page.goto(route);
+      await page.goto(siteUrl(route));
       await expect(page.locator("main").first()).toBeVisible();
       const overflow = await page.evaluate(() => Array.from(document.querySelectorAll("main input, main select, main article, main h1, main h2, header nav")).filter((node) => {
         if (node.closest('[inert], [aria-hidden="true"]')) return false;

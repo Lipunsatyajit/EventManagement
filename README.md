@@ -1,4 +1,24 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Utkal Events
+
+Odisha event planner marketplace demo built with Next.js.
+
+## GitHub Pages Deployment
+
+Follow [the GitHub Pages setup guide](docs/GITHUB-PAGES.md).
+In repository Settings > Pages, set Source to **GitHub Actions**.
+The deployment workflow publishes the built `out/` folder, not this README.
+
+```sh
+npm run build:pages
+npm run preview:pages
+```
+
+Preview: http://localhost:3100/EventManagement/
+
+Browser-only demo login: `customer@utkalevents.in`, `dream@utkalevents.in`, or
+`admin@utkalevents.in`; OTP: `123456`.
+
+The remaining sections are the original Next.js starter instructions.
 
 ## Getting Started
 

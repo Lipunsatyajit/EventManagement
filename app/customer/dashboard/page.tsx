@@ -1,5 +1,4 @@
-import { redirect } from "next/navigation";
-
+import { ClientRedirect } from "@/app/_components/client-redirect";
 export default function CustomerDashboardPage() {
-  redirect("/planners");
+  return <ClientRedirect href="/planners" />;
 }

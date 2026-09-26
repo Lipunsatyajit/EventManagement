@@ -1,3 +1,6 @@
+"use client";
+import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { AuthShell } from "../(auth)/_components/auth-shell";
 import { UnifiedLoginForm } from "../(auth)/_components/unified-login-form";
 import { authRoleOptions, type AuthRoleKey } from "@/lib/auth-directory";
@@ -35,12 +38,11 @@ function getRoleCopy(role: AuthRoleKey) {
   };
 }
 
-export default async function LoginPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ role?: string }>;
-}) {
-  const { role } = await searchParams;
+export default function LoginPage() {
+  return <Suspense fallback={<p>Loading sign in...</p>}><LoginContent /></Suspense>;
+}
+function LoginContent() {
+  const role = useSearchParams().get("role");
   const initialRole =
     authRoleOptions.find((option) => option.role === role)?.role ?? "customer";
   const copy = getRoleCopy(initialRole);

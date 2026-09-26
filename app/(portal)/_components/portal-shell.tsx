@@ -1,4 +1,5 @@
 "use client";
+import { sitePath } from "@/lib/site-path";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -87,7 +88,7 @@ export function PortalShell({
             <div className={styles.sidebarInner}>
               <div className={styles.sidebarBrand}>
                 <Image
-                  src="/icon.svg"
+                  src={sitePath("/icon.svg")}
                   alt="Utkal Events"
                   width={42}
                   height={42}
@@ -194,7 +195,7 @@ export function PortalShell({
                           onClick={() => {
                             setUserMenuOpen(false);
                             clearAuthSession();
-                            window.location.assign("/");
+                            window.location.assign(sitePath("/"));
                           }}
                         >
                           <item.icon />
@@ -227,7 +228,7 @@ export function PortalShell({
                 <div className={styles.mobileDrawerHeader}>
                   <div className={styles.sidebarBrand}>
                     <Image
-                      src="/icon.svg"
+                      src={sitePath("/icon.svg")}
                       alt="Utkal Events"
                       width={42}
                       height={42}
@@ -294,7 +295,7 @@ export function PortalShell({
                       className={styles.mobileLogout}
                       onClick={() => {
                         clearAuthSession();
-                        window.location.assign("/");
+                        window.location.assign(sitePath("/"));
                       }}
                     >
                       <LogoutIcon />
